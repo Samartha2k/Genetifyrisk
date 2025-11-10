@@ -412,25 +412,31 @@ function displayResults(risk) {
   document.getElementById('riskScore').textContent = riskPercent + '%';
 
   // Determine risk category based on absolute percentage
-  let category, categoryColor;
+  let category, categoryColor, categoryBgColor, categoryTextColor;
   const riskPercentValue = parseFloat(riskPercent);
 
   if (riskPercentValue < 10) {
     category = 'Low Risk';
     categoryColor = '#10b981';
+    categoryBgColor = 'rgba(16, 185, 129, 0.25)';
+    categoryTextColor = '#d1fae5';
   } else if (riskPercentValue < 30) {
     category = 'Moderate Risk';
     categoryColor = '#f59e0b';
+    categoryBgColor = 'rgba(245, 158, 11, 0.25)';
+    categoryTextColor = '#fef3c7';
   } else {
     category = 'High Risk';
     categoryColor = '#ef4444';
+    categoryBgColor = 'rgba(239, 68, 68, 0.35)';
+    categoryTextColor = '#ffffff';
   }
 
   const categoryEl = document.getElementById('riskCategory');
   categoryEl.textContent = category;
-  categoryEl.style.background = categoryColor + '33';
-  categoryEl.style.color = categoryColor;
-  categoryEl.style.textShadow = '0 0 20px rgba(0, 0, 0, 0.8)'; // Add shadow for better visibility
+  categoryEl.style.background = categoryBgColor;
+  categoryEl.style.color = categoryTextColor;
+  categoryEl.style.textShadow = '0 2px 10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.7)'; // Enhanced shadow for better visibility
 
   // Population comparison
   document.getElementById('populationRisk').textContent = populationRisk + '%';
