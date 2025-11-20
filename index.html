@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Genetify Risk - Professional Genetic Risk Assessment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <!-- DNA Spiral Background -->
+  <div class="dna-background">
+    <div class="dna-helix">
+      <div class="dna-pair" style="--i: 0;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 1;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 2;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 3;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 4;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 5;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 6;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 7;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 8;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 9;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 10;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 11;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 12;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 13;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 14;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 15;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 16;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 17;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 18;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+      <div class="dna-pair" style="--i: 19;"><div class="dna-ball ball-left"></div><div class="dna-bar"></div><div class="dna-ball ball-right"></div></div>
+    </div>
+  </div>
+
+  <!-- PDF Export Button - Top Right -->
+  <div class="pdf-export-top">
+    <button class="export-pdf-btn" onclick="exportToPDF()" id="pdfExportBtn" style="display: none;">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M10,19L12,15H9V10H15V15L13,19H10Z"/>
+      </svg>
+      <span>Download PDF</span>
+    </button>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-container">
+        <img src="logo.svg" alt="Genetify Risk Logo" class="logo">
+      </div>
+      <h1>Genetify Risk</h1>
+    </div>
+
+    <!-- Main Card -->
+    <div class="card">
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-steps" role="navigation" aria-label="Form progress">
+          <div class="progress-line">
+            <div class="progress-line-fill" id="progressFill"></div>
+          </div>
+          <button type="button" class="step active" data-step="1" onclick="goToStep(1)" aria-current="step">
+            <div class="step-circle">1</div>
+            <div class="step-label">Disease</div>
+          </button>
+          <button type="button" class="step" data-step="2" onclick="goToStep(2)" disabled>
+            <div class="step-circle">2</div>
+            <div class="step-label">Personal Info</div>
+          </button>
+          <button type="button" class="step" data-step="3" onclick="goToStep(3)" disabled>
+            <div class="step-circle">3</div>
+            <div class="step-label">Family History</div>
+          </button>
+          <button type="button" class="step" data-step="4" onclick="goToStep(4)" disabled>
+            <div class="step-circle">4</div>
+            <div class="step-label">Lifestyle</div>
+          </button>
+          <button type="button" class="step" data-step="5" onclick="goToStep(5)" disabled>
+            <div class="step-circle">5</div>
+            <div class="step-label">Results</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Form Content -->
+      <div class="form-content">
+        <!-- Step 1: Disease Selection -->
+        <div class="form-step active" data-step="1">
+          <h2 class="step-title">Select Genetic Disorder</h2>
+          <p class="step-description">Choose the genetic disorder you want to assess risk for</p>
+
+          <div class="form-group">
+            <label>Category</label>
+            <select id="diseaseCategory" onchange="filterDiseases()">
+              <option value="all">All Diseases</option>
+              <option value="autosomal-dominant">Autosomal Dominant</option>
+              <option value="autosomal-recessive">Autosomal Recessive</option>
+              <option value="x-linked">X-Linked</option>
+              <option value="multifactorial">Multifactorial</option>
+            </select>
+          </div>
+
+          <div class="disease-grid" id="diseaseGrid"></div>
+        </div>
+
+        <!-- Step 2: Personal Information -->
+        <div class="form-step" data-step="2">
+          <h2 class="step-title">Personal Information</h2>
+          <p class="step-description">Tell us about yourself</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Age <span class="required">*</span></label>
+              <input type="number" id="age" min="0" max="120" required>
+            </div>
+            <div class="form-group">
+              <label>Biological Sex <span class="required">*</span></label>
+              <select id="sex" required>
+                <option value="">Select...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Ethnicity/Ancestry <span class="required">*</span></label>
+            <select id="ethnicity" required>
+              <option value="">Select...</option>
+              <option value="european">European</option>
+              <option value="african">African</option>
+              <option value="asian">Asian</option>
+              <option value="hispanic">Hispanic/Latino</option>
+              <option value="native-american">Native American</option>
+              <option value="middle-eastern">Middle Eastern</option>
+              <option value="mixed">Mixed</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Have you been tested for carrier status? <span class="optional">(Optional)</span></label>
+            <select id="carrierStatus">
+              <option value="unknown">Unknown/Not Tested</option>
+              <option value="carrier">Yes, I am a carrier (have gene but no symptoms)</option>
+              <option value="not-carrier">No, I am not a carrier (tested negative)</option>
+              <option value="affected">I am affected by this condition (have symptoms)</option>
+            </select>
+            <div class="field-hint">Carrier status is typically determined through genetic testing</div>
+          </div>
+
+          <div class="form-group">
+            <label>Height <span class="optional">(Optional)</span></label>
+            <div class="unit-toggle">
+              <select id="heightUnit" onchange="toggleHeightUnit()">
+                <option value="cm">Centimeters (cm)</option>
+                <option value="ft">Feet & Inches</option>
+              </select>
+            </div>
+            <div id="heightCm" class="height-input">
+              <input type="number" id="heightCmValue" min="50" max="300" placeholder="e.g., 170" onchange="calculateBMI()">
+            </div>
+            <div id="heightFt" class="height-input" style="display: none;">
+              <div class="form-row">
+                <input type="number" id="heightFeet" min="1" max="8" placeholder="Feet" onchange="calculateBMI()">
+                <input type="number" id="heightInches" min="0" max="11" placeholder="Inches" onchange="calculateBMI()">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Weight <span class="optional">(Optional)</span></label>
+            <div class="unit-toggle">
+              <select id="weightUnit" onchange="toggleWeightUnit()">
+                <option value="kg">Kilograms (kg)</option>
+                <option value="lbs">Pounds (lbs)</option>
+              </select>
+            </div>
+            <div id="weightKg" class="weight-input">
+              <input type="number" id="weightKgValue" min="20" max="500" placeholder="e.g., 70" onchange="calculateBMI()">
+            </div>
+            <div id="weightLbs" class="weight-input" style="display: none;">
+              <input type="number" id="weightLbsValue" min="40" max="1000" placeholder="e.g., 154" onchange="calculateBMI()">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Step 3: Family History -->
+        <div class="form-step" data-step="3">
+          <h2 class="step-title">Family History</h2>
+          <p class="step-description">Information about affected family members</p>
+
+          <div class="form-group">
+            <label>Are any family members affected or carriers?</label>
+            <select id="hasAffectedFamily" onchange="toggleFamilyMembers()">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+              <option value="unknown">Unknown / Not Sure</option>
+            </select>
+          </div>
+
+          <div id="familyMembersContainer" style="display: none;">
+            <div id="familyMembersList"></div>
+            <button type="button" class="add-family-btn" onclick="addFamilyMember()">+ Add Family Member</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Lifestyle & Health Factors -->
+        <div class="form-step" data-step="4">
+          <h2 class="step-title">Lifestyle & Health Factors</h2>
+          <p class="step-description">These factors help refine risk calculation for multifactorial diseases</p>
+
+          <div class="form-group">
+            <label>Blood Pressure <span class="optional">(Optional)</span></label>
+            <select id="bloodPressure">
+              <option value="normal">Normal</option>
+              <option value="elevated">Elevated</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Smoking Status</label>
+            <select id="smoking">
+              <option value="never">Never</option>
+              <option value="former">Former Smoker</option>
+              <option value="current">Current Smoker</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Physical Activity Level</label>
+            <select id="activity">
+              <option value="sedentary">Sedentary</option>
+              <option value="light">Light Activity</option>
+              <option value="moderate">Moderate Activity</option>
+              <option value="vigorous">Vigorous Activity</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Diet Quality</label>
+            <select id="diet">
+              <option value="poor">Poor</option>
+              <option value="average">Average</option>
+              <option value="good">Good</option>
+              <option value="excellent">Excellent</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Stress Level</label>
+            <select id="stress">
+              <option value="low">Low</option>
+              <option value="moderate">Moderate</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Error Message Container -->
+        <div class="error-container" id="errorContainer" role="alert" aria-live="polite"></div>
+
+        <!-- Navigation Buttons -->
+        <div class="button-group">
+          <button type="button" class="btn-secondary" id="prevBtn" onclick="previousStep()" style="display: none;">Previous</button>
+          <button type="button" class="btn-primary" id="nextBtn" onclick="nextStep()">
+            <span class="btn-text">Next</span>
+            <span class="btn-loading" style="display: none;">
+              <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round">
+                  <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>Calculating your risk assessment...</p>
+      </div>
+    </div>
+
+    <!-- Results Container -->
+    <div class="results-container card" id="resultsContainer" role="region" aria-live="polite" aria-label="Risk Assessment Results">
+      <div class="results-header">
+        <h2>Your Genetic Risk Assessment</h2>
+        <div class="risk-score" id="riskScore" aria-label="Calculated risk percentage">---%</div>
+        <div class="risk-category" id="riskCategory" aria-label="Risk category">---</div>
+      </div>
+
+      <div class="results-body">
+        <!-- Risk Comparison -->
+        <div class="result-section">
+          <h3>Population Comparison</h3>
+          <div class="comparison-bar">
+            <div>
+              <strong>Your Risk vs. General Population</strong>
+              <div class="bar-container">
+                <div class="bar-fill" id="comparisonBar" style="width: 0%"></div>
+              </div>
+              <div class="bar-label">
+                <span>General Population: <span id="populationRisk">---%</span></span>
+                <span>Your Risk: <span id="yourRisk">---%</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contributing Factors -->
+        <div class="result-section">
+          <h3>Contributing Factors</h3>
+          <ul class="factor-list" id="factorsList"></ul>
+        </div>
+
+        <!-- Detailed Information -->
+        <div class="result-section">
+          <h3>Understanding Your Results</h3>
+          <div class="info-card">
+            <h4>What This Means</h4>
+            <p id="riskExplanation"></p>
+          </div>
+          <div class="info-card">
+            <h4>Confidence Interval</h4>
+            <p id="confidenceInterval"></p>
+          </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="result-section">
+          <h3>Personalized Recommendations</h3>
+          <div class="recommendations">
+            <ul id="recommendationsList"></ul>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <h4>⚠️ Important Medical Disclaimer</h4>
+          <p>
+            This genetic risk assessment is for educational and informational purposes only.
+            It is NOT a substitute for professional medical advice, diagnosis, or treatment.
+            Always consult with a qualified healthcare provider or genetic counselor before making
+            any decisions regarding your health. The calculations are based on statistical models
+            and may not account for all individual factors. Actual risk may vary significantly
+            based on additional genetic, environmental, and lifestyle factors not captured in this assessment.
+          </p>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-primary restart-btn" onclick="restartAssessment()">Start New Assessment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Show PDF button when results are displayed
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.target.classList.contains('active')) {
+            document.getElementById('pdfExportBtn').style.display = 'inline-flex';
+          }
+        });
+      });
+
+      const resultsContainer = document.getElementById('resultsContainer');
+      if (resultsContainer) {
+        observer.observe(resultsContainer, { attributes: true, attributeFilter: ['class'] });
+      }
+    });
+  </script>
+</body>
+</html>
